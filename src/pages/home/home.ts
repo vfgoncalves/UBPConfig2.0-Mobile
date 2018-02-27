@@ -1,6 +1,6 @@
 import { Sistema } from './../../models/sistema';
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, MenuController } from 'ionic-angular';
 import { SistemaProvider } from '../../providers/sistema/sistema';
 import { Observable } from 'rxjs';
 
@@ -13,13 +13,15 @@ export class HomePage {
 
   constructor(
     public navCtrl: NavController,
-    public sisService: SistemaProvider
+    public sisService: SistemaProvider,
+    public menuCtrl: MenuController
   ) {
 
   }
 
   ionViewDidLoad() {
+    this.menuCtrl.swipeEnable(true);
     this.sistemas = this.sisService.getAll().valueChanges();
-  }  
+  }    
 
 }

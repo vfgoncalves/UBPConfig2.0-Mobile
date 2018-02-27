@@ -1,11 +1,12 @@
+import { AuthProvider } from './../providers/auth/auth';
 import { CadastroSistemaPage } from './../pages/cadastro-sistema/cadastro-sistema';
 import { LoginPage } from './../pages/login/login';
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
+import { Nav, Platform, Loading, LoadingController, AlertController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-
 import { HomePage } from '../pages/home/home';
+import * as firebase from 'firebase/app';
 
 @Component({
   templateUrl: 'app.html'
@@ -15,15 +16,24 @@ export class MyApp {
 
   rootPage: any = LoginPage;
 
-  pages: Array<{title: string, component: any}>;
+  pages: Array<{ title: string, component: any }>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(
+    public platform: Platform,
+    public statusBar: StatusBar,
+    public splashScreen: SplashScreen,
+    public loadingCtrl: LoadingController,
+    public alertCtrl: AlertController,
+    public authService: AuthProvider
+
+  ) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Home', component: HomePage },
-      { title: 'Cadastro de Sistemas', component: CadastroSistemaPage }
+      { title: 'Cadastro de Sistemas', component: CadastroSistemaPage },
+      { title: 'Sair', component: null }
     ];
 
   }
@@ -38,8 +48,37 @@ export class MyApp {
   }
 
   openPage(page) {
-    // Reset the content nav to have just this page
-    // we wouldn't want the back button to show in this scenario
-    this.nav.setRoot(page.component);
+    if (page.component) {
+      // Reset the content nav to have just this page
+      // we wouldn't want the back button to show in this scenario
+      this.nav.setRoot(page.component);
+    } else {
+      let loading: Loading = this.showLoading();
+      this.authService.singOut()
+      .then((user: firebase.User) => {
+        loading.dismiss();
+        this.nav.setRoot(LoginPage);
+      }).catch((error: any)=>{
+        this.showAlert("Erro ao efetuar logout!")
+      });      
+    }
+
+  }
+  
+  private showLoading(): Loading {
+    let loading: Loading = this.loadingCtrl.create({
+      content: 'Por favor, aguarde...'
+    });
+
+    loading.present();
+
+    return loading;
+  }
+
+  private showAlert(message: string): void {
+    this.alertCtrl.create({
+      message: message,
+      buttons: ['Ok']
+    }).present();
   }
 }

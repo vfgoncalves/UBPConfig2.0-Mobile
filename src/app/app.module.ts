@@ -1,5 +1,4 @@
 import { CadastroSistemaPage } from './../pages/cadastro-sistema/cadastro-sistema';
-import { HttpClient } from '@angular/common/http';
 import { CadastroPage } from './../pages/cadastro/cadastro';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';

@@ -3,7 +3,7 @@ import { AuthProvider } from './../../providers/auth/auth';
 import { CadastroPage } from './../cadastro/cadastro';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AlertController, IonicPage, NavController, NavParams, Loading, LoadingController } from 'ionic-angular';
+import { AlertController, IonicPage, NavController, NavParams, Loading, LoadingController, MenuController } from 'ionic-angular';
 import * as firebase from 'firebase/app';
 
 /**
@@ -27,7 +27,8 @@ export class LoginPage {
               public formBuilder: FormBuilder,
               public loadingCtrl: LoadingController,
               public alertCtrl: AlertController,
-              public authService: AuthProvider
+              public authService: AuthProvider,
+              public menuCtrl: MenuController
             ) {
     let emailRegex = /^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i;
 
@@ -38,7 +39,7 @@ export class LoginPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
+    this.menuCtrl.swipeEnable(false);
   }
 
   onSubmit(): void {

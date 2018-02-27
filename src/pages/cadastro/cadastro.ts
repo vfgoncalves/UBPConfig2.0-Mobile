@@ -4,7 +4,7 @@ import { AuthProvider } from './../../providers/auth/auth';
 import { UserProvider } from './../../providers/user/user';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component } from '@angular/core';
-import { Loading, IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
+import { Loading, IonicPage, NavController, NavParams, LoadingController, AlertController, MenuController } from 'ionic-angular';
 import * as firebase from 'firebase/app';
 
 /**
@@ -30,7 +30,8 @@ export class CadastroPage {
     public loadingCtrl: LoadingController,
     public alertCtrl: AlertController,
     public userService: UserProvider, 
-    public authService: AuthProvider
+    public authService: AuthProvider,
+    public menuCtrl: MenuController
   ) {
     let emailRegex = /^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i;
     let pwdRegex = /^(?=.*[0-9].*[0-9])(?=.*[a-z].*[a-z])(?=.*[A-Z]).{8,}$/i;
@@ -45,7 +46,7 @@ export class CadastroPage {
   }
 
   ionViewDidLoad() {
-    
+    this.menuCtrl.swipeEnable(false);
   }
 
   onSubmit(): void {

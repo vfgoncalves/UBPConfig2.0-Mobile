@@ -1,6 +1,5 @@
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BaseProvider } from '../base/base';
 import * as firebase from 'firebase/app';
