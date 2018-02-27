@@ -47,14 +47,12 @@ export class LoginPage {
     console.log("Onsubmit");
     this.authService.signIn(this.signinForm.value.email, this.signinForm.value.password)
       .then((user: firebase.User) => {
-        console.log("sucesso");
         //usuário autenticado
         this.navCtrl.setRoot(HomePage);
         loading.dismiss();
       })
       .catch((error: any) => {
         //erro na autenticação
-        console.log("erro");
         loading.dismiss();
         this.showAlert(error);
       })
@@ -66,7 +64,7 @@ export class LoginPage {
 
   private showLoading(): Loading {
     let loading: Loading = this.loadingCtrl.create({
-      content: 'Please wait...'
+      content: 'Por favor, aguarde...'
     });
 
     loading.present();

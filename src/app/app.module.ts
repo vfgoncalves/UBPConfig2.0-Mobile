@@ -1,3 +1,4 @@
+import { CadastroSistemaPage } from './../pages/cadastro-sistema/cadastro-sistema';
 import { HttpClient } from '@angular/common/http';
 import { CadastroPage } from './../pages/cadastro/cadastro';
 import { BrowserModule } from '@angular/platform-browser';
@@ -6,8 +7,6 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
-
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -15,9 +14,9 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { LoginPage } from '../pages/login/login';
-import { BaseProvider } from '../providers/base/base';
 import { AuthProvider } from '../providers/auth/auth';
 import { UserProvider } from '../providers/user/user';
+import { SistemaProvider } from '../providers/sistema/sistema';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyA0XbMc-o7DMfqSQ98sZaDkaNdxl6uHKwA",
@@ -32,9 +31,9 @@ export const firebaseConfig = {
   declarations: [
     MyApp,
     HomePage,
-    ListPage,
     LoginPage,
-    CadastroPage
+    CadastroPage,
+    CadastroSistemaPage
   ],
   imports: [
     BrowserModule,
@@ -47,16 +46,17 @@ export const firebaseConfig = {
   entryComponents: [
     MyApp,
     HomePage,
-    ListPage,
     LoginPage,
-    CadastroPage
+    CadastroPage,
+    CadastroSistemaPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     AuthProvider,
-    UserProvider
+    UserProvider,
+    SistemaProvider
   ]
 })
 export class AppModule { }

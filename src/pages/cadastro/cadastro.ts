@@ -29,7 +29,7 @@ export class CadastroPage {
     public formBuilder: FormBuilder,
     public loadingCtrl: LoadingController,
     public alertCtrl: AlertController,
-    public userService: UserProvider,
+    public userService: UserProvider, 
     public authService: AuthProvider
   ) {
     let emailRegex = /^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i;
@@ -45,7 +45,7 @@ export class CadastroPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad CadastroPage');
+    
   }
 
   onSubmit(): void {
@@ -69,7 +69,7 @@ export class CadastroPage {
           .catch((error: any) => {
             loading.dismiss();
             this.showAlert(error);
-          })
+          }) 
 
       })
       .catch((error: any) => {
