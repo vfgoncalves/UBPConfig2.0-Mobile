@@ -1,3 +1,4 @@
+import { CadastroClientePage } from './../pages/cadastro-cliente/cadastro-cliente';
 import { AuthProvider } from './../providers/auth/auth';
 import { CadastroSistemaPage } from './../pages/cadastro-sistema/cadastro-sistema';
 import { LoginPage } from './../pages/login/login';
@@ -33,6 +34,7 @@ export class MyApp {
     this.pages = [
       { title: 'Home', component: HomePage },
       { title: 'Cadastro de Sistemas', component: CadastroSistemaPage },
+      { title: 'Cadastro de Clientes', component: CadastroClientePage },
       { title: 'Sair', component: null }
     ];
 

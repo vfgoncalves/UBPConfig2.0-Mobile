@@ -1,3 +1,4 @@
+import { CadastroClientePage } from './../pages/cadastro-cliente/cadastro-cliente';
 import { CadastroSistemaPage } from './../pages/cadastro-sistema/cadastro-sistema';
 import { CadastroPage } from './../pages/cadastro/cadastro';
 import { BrowserModule } from '@angular/platform-browser';
@@ -16,6 +17,7 @@ import { LoginPage } from '../pages/login/login';
 import { AuthProvider } from '../providers/auth/auth';
 import { UserProvider } from '../providers/user/user';
 import { SistemaProvider } from '../providers/sistema/sistema';
+import { ClienteProvider } from '../providers/cliente/cliente';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyA0XbMc-o7DMfqSQ98sZaDkaNdxl6uHKwA",
@@ -32,7 +34,8 @@ export const firebaseConfig = {
     HomePage,
     LoginPage,
     CadastroPage,
-    CadastroSistemaPage
+    CadastroSistemaPage,
+    CadastroClientePage
   ],
   imports: [
     BrowserModule,
@@ -47,7 +50,8 @@ export const firebaseConfig = {
     HomePage,
     LoginPage,
     CadastroPage,
-    CadastroSistemaPage
+    CadastroSistemaPage,
+    CadastroClientePage
   ],
   providers: [
     StatusBar,
@@ -55,7 +59,8 @@ export const firebaseConfig = {
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     AuthProvider,
     UserProvider,
-    SistemaProvider
+    SistemaProvider,
+    ClienteProvider
   ]
 })
 export class AppModule { }
