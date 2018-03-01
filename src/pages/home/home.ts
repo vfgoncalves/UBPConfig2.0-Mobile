@@ -1,3 +1,4 @@
+import { CadastroSistemaPage } from './../cadastro-sistema/cadastro-sistema';
 import { Sistema } from './../../models/sistema';
 import { Component } from '@angular/core';
 import { NavController, MenuController } from 'ionic-angular';
@@ -23,5 +24,9 @@ export class HomePage {
     this.menuCtrl.swipeEnable(true);
     this.sistemas = this.sisService.getAll().valueChanges();
   }    
+
+  addSis(){
+    this.navCtrl.push(CadastroSistemaPage);
+  }
 
 }

@@ -96,4 +96,14 @@ export class CadastroPage {
     }).present();
   }
 
+  loginUser() {
+    this.authService.loginWithGoogle().then(data => {
+      let user: User = new User(data["user"]["displayName"], data["user"]["email"], data["user"]["email"]);
+      console.log(data);
+      this.userService.create(user, data["user"]["G"]).then(r => {
+        this.navCtrl.setRoot(HomePage);
+      })
+    })
+  }
+
 }

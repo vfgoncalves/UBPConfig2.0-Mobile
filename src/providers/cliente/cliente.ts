@@ -1,6 +1,6 @@
 import { Cliente } from './../../models/cliente';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import { Injectable } from '@angular/core';
 import { BaseProvider } from '../base/base';
 import * as firebase from 'firebase/app';
@@ -18,7 +18,7 @@ export class ClienteProvider extends BaseProvider {
     public db: AngularFireDatabase,
     public afAuth: AngularFireAuth,
   ) {
-    super();
+    super(); 
     this.listenAuthState();
   }
   private listenAuthState(): void {
@@ -37,6 +37,9 @@ export class ClienteProvider extends BaseProvider {
     return this.db.object(`/clientes/${this.uuid}/${id}`)            
       .set(cli)
       .catch(this.handlePromiseError);
+  }
+  getAll():AngularFireList<Cliente>{
+    return this.db.list(`/clientes/${this.uuid}`)
   }
 
   createPushId():string{

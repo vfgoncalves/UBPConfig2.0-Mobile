@@ -18,6 +18,7 @@ import { AuthProvider } from '../providers/auth/auth';
 import { UserProvider } from '../providers/user/user';
 import { SistemaProvider } from '../providers/sistema/sistema';
 import { ClienteProvider } from '../providers/cliente/cliente';
+import { MeusClientesPage } from '../pages/meus-clientes/meus-clientes';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyA0XbMc-o7DMfqSQ98sZaDkaNdxl6uHKwA",
@@ -35,7 +36,8 @@ export const firebaseConfig = {
     LoginPage,
     CadastroPage,
     CadastroSistemaPage,
-    CadastroClientePage
+    CadastroClientePage,
+    MeusClientesPage
   ],
   imports: [
     BrowserModule,
@@ -51,7 +53,8 @@ export const firebaseConfig = {
     LoginPage,
     CadastroPage,
     CadastroSistemaPage,
-    CadastroClientePage
+    CadastroClientePage,
+    MeusClientesPage
   ],
   providers: [
     StatusBar,

@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { BaseProvider } from '../base/base';
 import { AngularFireAuth } from 'angularfire2/auth';
@@ -17,23 +18,30 @@ export class AuthProvider extends BaseProvider {
   ) {
     super();
   }
+  public isLogged(): Observable<firebase.User> {
+    return this.afAuth.authState      
+  }
 
-  createAuthUser(user: {email: string, password: string}): Promise<firebase.User> {
+  createAuthUser(user: { email: string, password: string }): Promise<firebase.User> {
     return this.afAuth.auth.createUserWithEmailAndPassword(user.email, user.password)
       .catch(this.handlePromiseError);
   }
 
-  getAuthState():any{
-    return this.afAuth.authState ;
+  loginWithGoogle(): Promise<any>{
+    return this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
   }
 
-  singOut():Promise<firebase.User>{
+  getAuthState(): any {
+    return this.afAuth.authState;
+  }
+
+  singOut(): Promise<firebase.User> {
     return this.afAuth.auth.signOut().catch(this.handlePromiseError);
   }
 
-  signIn(email: string, password: string):Promise<firebase.User> {
+  signIn(email: string, password: string): Promise<firebase.User> {
     return this.afAuth.auth.signInWithEmailAndPassword(email, password)
-    .catch(this.handlePromiseError);
+      .catch(this.handlePromiseError);
   }
 
 }

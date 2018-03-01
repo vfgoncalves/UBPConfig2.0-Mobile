@@ -1,3 +1,5 @@
+import { User } from './../../models/user';
+import { UserProvider } from './../../providers/user/user';
 import { HomePage } from './../home/home';
 import { AuthProvider } from './../../providers/auth/auth';
 import { CadastroPage } from './../cadastro/cadastro';
@@ -22,14 +24,15 @@ export class LoginPage {
 
   signinForm: FormGroup;
 
-  constructor(public navCtrl: NavController, 
-              public navParams: NavParams,
-              public formBuilder: FormBuilder,
-              public loadingCtrl: LoadingController,
-              public alertCtrl: AlertController,
-              public authService: AuthProvider,
-              public menuCtrl: MenuController
-            ) {
+  constructor(public navCtrl: NavController,
+    public navParams: NavParams,
+    public formBuilder: FormBuilder,
+    public loadingCtrl: LoadingController,
+    public alertCtrl: AlertController,
+    public authService: AuthProvider,
+    public menuCtrl: MenuController,
+    public userService: UserProvider
+  ) {
     let emailRegex = /^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i;
 
     this.signinForm = this.formBuilder.group({
@@ -40,6 +43,12 @@ export class LoginPage {
 
   ionViewDidLoad() {
     this.menuCtrl.swipeEnable(false);
+    this.authService.isLogged()
+      .subscribe((authUser: firebase.User) => {
+        if (authUser) {
+          this.navCtrl.setRoot(HomePage);
+        }
+      });
   }
 
   onSubmit(): void {
@@ -78,6 +87,16 @@ export class LoginPage {
       message: message,
       buttons: ['Ok']
     }).present();
+  }
+
+  loginUser() {
+    this.authService.loginWithGoogle().then(data => {
+      let user: User = new User(data["user"]["displayName"], data["user"]["email"], data["user"]["email"]);
+      console.log(data);
+      this.userService.create(user, data["user"]["G"]).then(r => {
+        this.navCtrl.setRoot(HomePage);
+      })
+    })
   }
 
 }
