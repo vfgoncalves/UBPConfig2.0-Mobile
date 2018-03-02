@@ -1,3 +1,6 @@
+import { HomePage } from './../pages/home/home';
+import { User } from './../models/user';
+import { UserProvider } from './../providers/user/user';
 import { MeusClientesPage } from './../pages/meus-clientes/meus-clientes';
 import { CadastroClientePage } from './../pages/cadastro-cliente/cadastro-cliente';
 import { AuthProvider } from './../providers/auth/auth';
@@ -7,8 +10,8 @@ import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform, Loading, LoadingController, AlertController, Events } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { HomePage } from '../pages/home/home';
 import * as firebase from 'firebase/app';
+
 
 @Component({
   templateUrl: 'app.html'
@@ -17,10 +20,8 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   rootPage: any = LoginPage;
-
   pages: Array<{ title: string, component: any }>;
   
-
 
   constructor(
     public platform: Platform,
@@ -28,8 +29,8 @@ export class MyApp {
     public splashScreen: SplashScreen,
     public loadingCtrl: LoadingController,
     public alertCtrl: AlertController,
-    public authService: AuthProvider,
-    public events: Events
+    public authService: AuthProvider,    
+    public userService: UserProvider
 
   ) {
     this.initializeApp();
@@ -44,7 +45,7 @@ export class MyApp {
     ];
   }
 
-  
+
 
   initializeApp() {
     this.platform.ready().then(() => {

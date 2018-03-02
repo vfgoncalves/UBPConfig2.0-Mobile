@@ -1,9 +1,10 @@
 import { CadastroSistemaPage } from './../cadastro-sistema/cadastro-sistema';
 import { Sistema } from './../../models/sistema';
 import { Component } from '@angular/core';
-import { NavController, MenuController } from 'ionic-angular';
+import { NavController, MenuController, NavParams } from 'ionic-angular';
 import { SistemaProvider } from '../../providers/sistema/sistema';
 import { Observable } from 'rxjs';
+import { VersoesPage } from '../versoes/versoes';
 
 @Component({
   selector: 'page-home',
@@ -27,6 +28,10 @@ export class HomePage {
 
   addSis(){
     this.navCtrl.push(CadastroSistemaPage);
+  }
+
+  openVersion(sistema: Sistema){
+    this.navCtrl.push(VersoesPage, {sistema: sistema});
   }
 
 }

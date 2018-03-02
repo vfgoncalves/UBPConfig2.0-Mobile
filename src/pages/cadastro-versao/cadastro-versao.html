@@ -1,5 +1,5 @@
 <!--
-  Generated template for the CadastroSistemaPage page.
+  Generated template for the CadastroVersaoPage page.
 
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
@@ -7,17 +7,13 @@
 <ion-header>
 
   <ion-navbar>
-    <button ion-button menuToggle>
-      <ion-icon name="menu" color="dark"></ion-icon>
-    </button>
-    <ion-title>Cadastro de Sistemas</ion-title>
+    <ion-title>Cadastro de Versão</ion-title>
   </ion-navbar>
 
 </ion-header>
 
-
+ 
 <ion-content padding>
-
   <form [formGroup]="cadastroForm" (ngSubmit)="onSubmit(); $event.preventDefault()">
 
     <ion-item>
@@ -26,13 +22,12 @@
     </ion-item>
 
     <ion-item>
-      <ion-label floating>Descrição</ion-label>
-      <ion-textarea formControlName="descricao"></ion-textarea>
+      <ion-label floating>Data prevista</ion-label>
+      <ion-datetime displayFormat="MM/DD/YYYY" formControlName="dataPrevista"></ion-datetime>
     </ion-item>
 
     <br>
-    <button ion-button color="dark" full type="submit" [disabled]="cadastroForm.invalid">Cadastrar</button>
+    <button ion-button color="dark" full type="submit" [disabled]="cadastroForm.invalid">Cadastrar Versão</button>
 
   </form>
-
 </ion-content>

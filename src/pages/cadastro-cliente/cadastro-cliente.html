@@ -19,19 +19,16 @@
   <form [formGroup]="cadastroForm" (ngSubmit)="onSubmit(); $event.preventDefault()">
 
     <ion-item>
-      <ion-icon name="code" item-start color="dark"></ion-icon>
       <ion-label floating>Nome</ion-label>
       <ion-input type="text" formControlName="nome"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-icon name="mail" item-start color="dark"></ion-icon>
       <ion-label floating>E-mail</ion-label>
       <ion-input type="email" formControlName="email"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-icon name="folder" item-start color="dark"></ion-icon>
       <ion-label floating>Sistemas</ion-label>
       <ion-select multiple="true" formControlName="sistemas">
         <div *ngFor='let sistema of sistemas | async'>

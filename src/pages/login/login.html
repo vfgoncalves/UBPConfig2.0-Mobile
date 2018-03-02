@@ -22,13 +22,11 @@
   <form [formGroup]="signinForm" (ngSubmit)="onSubmit(); $event.preventDefault()">
 
     <ion-item>
-      <ion-icon name="mail" item-start color="dark"></ion-icon>
       <ion-label floating>E-mail</ion-label>
       <ion-input type="email" formControlName="email"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-icon name="lock" item-start color="dark"></ion-icon>
       <ion-label floating>Senha</ion-label>
       <ion-input type="password" formControlName="password"></ion-input>
     </ion-item>

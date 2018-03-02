@@ -1,4 +1,4 @@
-import { ComponentsModule } from './../components/components.module';
+import { CadastroVersaoPage } from './../pages/cadastro-versao/cadastro-versao';
 import { CadastroClientePage } from './../pages/cadastro-cliente/cadastro-cliente';
 import { CadastroSistemaPage } from './../pages/cadastro-sistema/cadastro-sistema';
 import { CadastroPage } from './../pages/cadastro/cadastro';
@@ -20,7 +20,8 @@ import { UserProvider } from '../providers/user/user';
 import { SistemaProvider } from '../providers/sistema/sistema';
 import { ClienteProvider } from '../providers/cliente/cliente';
 import { MeusClientesPage } from '../pages/meus-clientes/meus-clientes';
-import { UserinfoComponent } from '../components/userinfo/userinfo';
+import { VersaoProvider } from '../providers/versao/versao';
+import { VersoesPage } from '../pages/versoes/versoes';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyA0XbMc-o7DMfqSQ98sZaDkaNdxl6uHKwA",
@@ -39,11 +40,12 @@ export const firebaseConfig = {
     CadastroPage,
     CadastroSistemaPage,
     CadastroClientePage,
-    MeusClientesPage
+    MeusClientesPage,
+    VersoesPage,
+    CadastroVersaoPage
   ],
   imports: [
     BrowserModule,
-    ComponentsModule,
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule,
@@ -57,7 +59,9 @@ export const firebaseConfig = {
     CadastroPage,
     CadastroSistemaPage,
     CadastroClientePage,
-    MeusClientesPage
+    MeusClientesPage,
+    VersoesPage,
+    CadastroVersaoPage
   ],
   providers: [
     StatusBar,
@@ -66,7 +70,8 @@ export const firebaseConfig = {
     AuthProvider,
     UserProvider,
     SistemaProvider,
-    ClienteProvider
+    ClienteProvider,
+    VersaoProvider
   ]
 })
 export class AppModule { }
