@@ -1,3 +1,4 @@
+import { ComponentsModule } from './../components/components.module';
 import { CadastroClientePage } from './../pages/cadastro-cliente/cadastro-cliente';
 import { CadastroSistemaPage } from './../pages/cadastro-sistema/cadastro-sistema';
 import { CadastroPage } from './../pages/cadastro/cadastro';
@@ -19,6 +20,7 @@ import { UserProvider } from '../providers/user/user';
 import { SistemaProvider } from '../providers/sistema/sistema';
 import { ClienteProvider } from '../providers/cliente/cliente';
 import { MeusClientesPage } from '../pages/meus-clientes/meus-clientes';
+import { UserinfoComponent } from '../components/userinfo/userinfo';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyA0XbMc-o7DMfqSQ98sZaDkaNdxl6uHKwA",
@@ -41,6 +43,7 @@ export const firebaseConfig = {
   ],
   imports: [
     BrowserModule,
+    ComponentsModule,
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule,

@@ -22,7 +22,7 @@ export class HomePage {
 
   ionViewDidLoad() {
     this.menuCtrl.swipeEnable(true);
-    this.sistemas = this.sisService.getAll().valueChanges();
+    this.sistemas = this.sisService.getAll().valueChanges();    
   }    
 
   addSis(){

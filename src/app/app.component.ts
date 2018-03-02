@@ -4,7 +4,7 @@ import { AuthProvider } from './../providers/auth/auth';
 import { CadastroSistemaPage } from './../pages/cadastro-sistema/cadastro-sistema';
 import { LoginPage } from './../pages/login/login';
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform, Loading, LoadingController, AlertController } from 'ionic-angular';
+import { Nav, Platform, Loading, LoadingController, AlertController, Events } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { HomePage } from '../pages/home/home';
@@ -19,6 +19,8 @@ export class MyApp {
   rootPage: any = LoginPage;
 
   pages: Array<{ title: string, component: any }>;
+  
+
 
   constructor(
     public platform: Platform,
@@ -26,7 +28,8 @@ export class MyApp {
     public splashScreen: SplashScreen,
     public loadingCtrl: LoadingController,
     public alertCtrl: AlertController,
-    public authService: AuthProvider
+    public authService: AuthProvider,
+    public events: Events
 
   ) {
     this.initializeApp();
@@ -39,8 +42,9 @@ export class MyApp {
       { title: 'Lista de Clientes', component: MeusClientesPage },
       { title: 'Sair', component: null }
     ];
-
   }
+
+  
 
   initializeApp() {
     this.platform.ready().then(() => {
@@ -59,16 +63,19 @@ export class MyApp {
     } else {
       let loading: Loading = this.showLoading();
       this.authService.singOut()
-      .then((user: firebase.User) => {
-        loading.dismiss();
-        this.nav.setRoot(LoginPage);
-      }).catch((error: any)=>{
-        this.showAlert("Erro ao efetuar logout!")
-      });      
+        .then((user: firebase.User) => {
+          localStorage.removeItem("username");
+          localStorage.removeItem("userphoto");
+          localStorage.clear();
+          loading.dismiss();
+          this.nav.setRoot(LoginPage);
+        }).catch((error: any) => {
+          this.showAlert("Erro ao efetuar logout!")
+        });
     }
 
   }
-  
+
   private showLoading(): Loading {
     let loading: Loading = this.loadingCtrl.create({
       content: 'Por favor, aguarde...'

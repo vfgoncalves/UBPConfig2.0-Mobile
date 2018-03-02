@@ -29,7 +29,7 @@ export class CadastroPage {
     public formBuilder: FormBuilder,
     public loadingCtrl: LoadingController,
     public alertCtrl: AlertController,
-    public userService: UserProvider, 
+    public userService: UserProvider,
     public authService: AuthProvider,
     public menuCtrl: MenuController
   ) {
@@ -58,11 +58,13 @@ export class CadastroPage {
       .createAuthUser({ email: formUser.email, password: formUser.senha })
       .then((authUser: firebase.User) => {
         let uuid: string = authUser.uid;
-        let user: User = new User(formUser.nome, formUser.usuario, formUser.email);
+        let user: User = new User(formUser.nome, formUser.usuario, formUser.email, null);
 
         //Grava dados do usuário no banco
         this.userService.create(user, uuid)
           .then(() => {
+            localStorage.setItem("userphoto", user.photoURL);
+            localStorage.setItem("username", user.name);
             //Usuário criado com sucesso
             this.navCtrl.setRoot(HomePage);
             loading.dismiss();
@@ -70,7 +72,7 @@ export class CadastroPage {
           .catch((error: any) => {
             loading.dismiss();
             this.showAlert(error);
-          }) 
+          })
 
       })
       .catch((error: any) => {
@@ -98,9 +100,11 @@ export class CadastroPage {
 
   loginUser() {
     this.authService.loginWithGoogle().then(data => {
-      let user: User = new User(data["user"]["displayName"], data["user"]["email"], data["user"]["email"]);
-      console.log(data);
+      let user: User = new User(data["user"]["displayName"], data["user"]["email"], data["user"]["email"], data["user"]["photoURL"]);
+      //console.log(data);
       this.userService.create(user, data["user"]["G"]).then(r => {
+        localStorage.setItem("userphoto", user.photoURL);
+        localStorage.setItem("username", user.name);
         this.navCtrl.setRoot(HomePage);
       })
     })

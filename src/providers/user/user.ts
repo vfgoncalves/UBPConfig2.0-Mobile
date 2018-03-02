@@ -75,4 +75,8 @@ export class UserProvider extends BaseProvider {
     return this.get(this.uuid);
   }
 
+  getUser(): AngularFireObject<User> {
+    return this.db.object<User>(`/users/${this.uuid}`);
+  }
+
 }
