@@ -1,5 +1,4 @@
 import { HomePage } from './../pages/home/home';
-import { User } from './../models/user';
 import { UserProvider } from './../providers/user/user';
 import { MeusClientesPage } from './../pages/meus-clientes/meus-clientes';
 import { CadastroClientePage } from './../pages/cadastro-cliente/cadastro-cliente';
@@ -7,7 +6,7 @@ import { AuthProvider } from './../providers/auth/auth';
 import { CadastroSistemaPage } from './../pages/cadastro-sistema/cadastro-sistema';
 import { LoginPage } from './../pages/login/login';
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform, Loading, LoadingController, AlertController, Events } from 'ionic-angular';
+import { Nav, Platform, Loading, LoadingController, AlertController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import * as firebase from 'firebase/app';

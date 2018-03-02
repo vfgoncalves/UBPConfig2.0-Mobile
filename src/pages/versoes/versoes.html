@@ -14,7 +14,7 @@
 
 
 <ion-content padding>
-  <ion-card *ngFor='let versao of versoes | async'>
+  <ion-card *ngFor='let versao of versoes | async' (click)="openVersion(versao)">
     <ion-card-header>
       {{versao.name}}
     </ion-card-header>
@@ -26,7 +26,7 @@
   </ion-card>
 
   <ion-fab bottom right (click)='addVersao()'>
-    <button ion-fab>
+    <button ion-fab color="dark">
       <ion-icon name="add"></ion-icon>
     </button>    
   </ion-fab>

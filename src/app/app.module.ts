@@ -1,3 +1,4 @@
+import { InfoVersaoPage } from './../pages/info-versao/info-versao';
 import { CadastroVersaoPage } from './../pages/cadastro-versao/cadastro-versao';
 import { CadastroClientePage } from './../pages/cadastro-cliente/cadastro-cliente';
 import { CadastroSistemaPage } from './../pages/cadastro-sistema/cadastro-sistema';
@@ -42,7 +43,8 @@ export const firebaseConfig = {
     CadastroClientePage,
     MeusClientesPage,
     VersoesPage,
-    CadastroVersaoPage
+    CadastroVersaoPage,
+    InfoVersaoPage
   ],
   imports: [
     BrowserModule,
@@ -61,7 +63,8 @@ export const firebaseConfig = {
     CadastroClientePage,
     MeusClientesPage,
     VersoesPage,
-    CadastroVersaoPage
+    CadastroVersaoPage,
+    InfoVersaoPage
   ],
   providers: [
     StatusBar,

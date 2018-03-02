@@ -1,7 +1,7 @@
 import { CadastroSistemaPage } from './../cadastro-sistema/cadastro-sistema';
 import { Sistema } from './../../models/sistema';
 import { Component } from '@angular/core';
-import { NavController, MenuController, NavParams } from 'ionic-angular';
+import { NavController, MenuController } from 'ionic-angular';
 import { SistemaProvider } from '../../providers/sistema/sistema';
 import { Observable } from 'rxjs';
 import { VersoesPage } from '../versoes/versoes';

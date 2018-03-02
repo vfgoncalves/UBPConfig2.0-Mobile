@@ -5,6 +5,7 @@ import { Sistema } from './../../models/sistema';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { VersaoProvider } from '../../providers/versao/versao';
+import { InfoVersaoPage } from '../info-versao/info-versao';
 
 /**
  * Generated class for the VersoesPage page.
@@ -44,8 +45,10 @@ export class VersoesPage {
       return "Liberada"
     }else{
       return "Não Liberada"
-    }
-    
+    }    
+  }
+  openVersion(versao: Versao){
+    this.navCtrl.push(InfoVersaoPage,{versao: versao})
   }
 
 }
