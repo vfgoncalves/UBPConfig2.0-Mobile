@@ -42,10 +42,7 @@ export class LoginPage {
     });
   }
 
-  ionViewDidLoad() {
-    localStorage.removeItem("username");
-    localStorage.removeItem("userphoto");
-    
+  ionViewDidLoad() {  
     let loading: Loading = this.showLoading();
     this.menuCtrl.swipeEnable(false);
     this.authService.isLogged()
@@ -58,9 +55,7 @@ export class LoginPage {
   }
 
   onSubmit(): void {
-
     let loading: Loading = this.showLoading();
-    console.log("Onsubmit");
     this.authService.signIn(this.signinForm.value.email, this.signinForm.value.password)
       .then((user: firebase.User) => {
         //usuário autenticado
@@ -99,8 +94,6 @@ export class LoginPage {
     this.authService.loginWithGoogle().then(data => {
       let user: User = new User(data["user"]["displayName"], data["user"]["email"], data["user"]["email"],data["user"]["photoURL"]);      
       this.userService.create(user, data["user"]["G"]).then(r => {        
-        localStorage.setItem("userphoto", user.photoURL);
-        localStorage.setItem("username", user.name);
         this.navCtrl.setRoot(HomePage);
       })
     })

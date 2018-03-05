@@ -64,9 +64,6 @@ export class MyApp {
       let loading: Loading = this.showLoading();
       this.authService.singOut()
         .then((user: firebase.User) => {
-          localStorage.removeItem("username");
-          localStorage.removeItem("userphoto");
-          localStorage.clear();
           loading.dismiss();
           this.nav.setRoot(LoginPage);
         }).catch((error: any) => {

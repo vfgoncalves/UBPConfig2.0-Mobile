@@ -24,7 +24,7 @@
       <br/> Status: {{status}}
       <br/>
     </ion-card-content>
-  </ion-card>  
+  </ion-card>
 
   <ion-card>
     <ion-card-header>
@@ -32,6 +32,11 @@
     </ion-card-header>
     <ion-card-content>
     </ion-card-content>
+
+    <label ion-button full color="dark" class="btn btn-default btn-file">
+      Selecionar Executável
+      <input type="file" style="display: none;" (change)="uploadExec($event)">
+    </label>
   </ion-card>
 
   <ion-card>
@@ -40,6 +45,11 @@
     </ion-card-header>
     <ion-card-content>
     </ion-card-content>
+
+    <label ion-button full color="dark" class="btn btn-default btn-file">
+      Selecionar Script
+      <input type="file" style="display: none;" (change)="uploadScript($event)">
+    </label>
   </ion-card>
 
   <ion-card>
@@ -48,26 +58,10 @@
     </ion-card-header>
     <ion-card-content>
     </ion-card-content>
+
+    <label ion-button full color="dark" class="btn btn-default btn-file">
+      Selecionar Documento
+      <input type="file" style="display: none;" (change)="uploadDocumento($event)">
+    </label>
   </ion-card>
-
-  <ion-fab bottom right>
-    <button ion-fab color="dark">
-      <ion-icon name="add"></ion-icon>
-    </button>
-    <ion-fab-list side="top">      
-      <button ion-fab>
-          <ion-icon name="logo-facebook"></ion-icon>
-      </button>
-      <button ion-fab>
-        Script
-      </button>
-      <button ion-fab>
-        Documentos
-      </button>
-      <button ion-fab>
-        Liberar Versão
-      </button>
-    </ion-fab-list>
-  </ion-fab>
-
 </ion-content>
