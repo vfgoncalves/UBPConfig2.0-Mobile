@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { Versao } from './../../models/versao';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
@@ -20,7 +21,7 @@ export class VersaoProvider extends BaseProvider {
   constructor(
     public db: AngularFireDatabase,
     public afAuth: AngularFireAuth,
-    public firebaseApp: FirebaseApp,
+    public firebaseApp: FirebaseApp    
   ) {
     super();
     this.listenAuthState();
@@ -58,6 +59,10 @@ export class VersaoProvider extends BaseProvider {
       .ref()
       .child(`/executavel/${this.uuid}/${idversao}/${executavel.name}`)
       .put(executavel);
+  }
+
+  getExecutaveis(idversao: string): Observable<any> {   
+    return this.db.list(`/executavel/${this.uuid}/${idversao}/`).valueChanges()
   }
 
   uploadScript(script, idversao: string): UploadTask {

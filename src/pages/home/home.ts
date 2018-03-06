@@ -1,7 +1,7 @@
 import { CadastroSistemaPage } from './../cadastro-sistema/cadastro-sistema';
 import { Sistema } from './../../models/sistema';
 import { Component } from '@angular/core';
-import { NavController, MenuController, Loading, AlertController, LoadingController } from 'ionic-angular';
+import { NavController, MenuController } from 'ionic-angular';
 import { SistemaProvider } from '../../providers/sistema/sistema';
 import { Observable } from 'rxjs';
 import { VersoesPage } from '../versoes/versoes';
@@ -16,9 +16,7 @@ export class HomePage {
   constructor(
     public navCtrl: NavController,
     public sisService: SistemaProvider,
-    public menuCtrl: MenuController,
-    public loadingCtrl: LoadingController,
-    public alertCtrl: AlertController
+    public menuCtrl: MenuController
   ) {
 
   }

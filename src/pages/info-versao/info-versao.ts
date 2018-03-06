@@ -1,4 +1,4 @@
-import { UploadTask, UploadTaskSnapshot } from '@firebase/storage-types';
+import { UploadTaskSnapshot } from '@firebase/storage-types';
 import { VersaoProvider } from './../../providers/versao/versao';
 import { Versao } from './../../models/versao';
 import { Component } from '@angular/core';
@@ -19,10 +19,14 @@ import { IonicPage, NavController, NavParams, LoadingController, AlertController
 export class InfoVersaoPage {
   versao: Versao;
   status: string;
+  executaveis: [{ exeuctavel: string, url: string }];
+  scripts: [{ script: string, url: string }];
+  documentos: [{ documento: string, url: string }];
+  fileUploads: any[];
 
   constructor(
     public navCtrl: NavController,
-    public navParams: NavParams,    
+    public navParams: NavParams,
     public loadingCtrl: LoadingController,
     public alertCtrl: AlertController,
     public versaoService: VersaoProvider
@@ -30,8 +34,13 @@ export class InfoVersaoPage {
     this.versao = this.navParams.get("versao");
   }
 
-  ionViewDidLoad() {    
+  ionViewDidLoad() {
     this.getStatus();
+
+    //lista de executáveis carregados
+    this.versaoService.getExecutaveis(this.versao.id).subscribe(r=>{
+      console.log(r);
+    })
   }
   getStatus() {
     if (this.versao.versaLiberada) {
@@ -41,37 +50,37 @@ export class InfoVersaoPage {
     }
   }
 
-  uploadExec(executavel){    
+  uploadExec(executavel) {
     let loading: Loading = this.showLoading();
-    this.versaoService.uploadExec(executavel.target.files[0], this.versao.id).then((r: UploadTaskSnapshot)=>{      
+    this.versaoService.uploadExec(executavel.target.files[0], this.versao.id).then((r: UploadTaskSnapshot) => {
       loading.dismiss();
       this.showAlert("Executável carregado com sucesso");
-    }).catch(err =>{
+    }).catch(err => {
       loading.dismiss();
       this.showAlert("Erro ao carregar o executável, tente novamente!");
-    });    
+    });
   }
 
-  uploadScript(script){
+  uploadScript(script) {
     let loading: Loading = this.showLoading();
-    this.versaoService.uploadExec(script.target.files[0], this.versao.id).then((r: UploadTaskSnapshot)=>{      
+    this.versaoService.uploadExec(script.target.files[0], this.versao.id).then((r: UploadTaskSnapshot) => {
       loading.dismiss();
       this.showAlert("Script carregado com sucesso");
-    }).catch(err =>{
+    }).catch(err => {
       loading.dismiss();
       this.showAlert("Erro ao carregar o script, tente novamente!");
-    });    
+    });
   }
-  
-  uploadDocumento(documento){    
+
+  uploadDocumento(documento) {
     let loading: Loading = this.showLoading();
-    this.versaoService.uploadExec(documento.target.files[0], this.versao.id).then((r: UploadTaskSnapshot)=>{      
+    this.versaoService.uploadExec(documento.target.files[0], this.versao.id).then((r: UploadTaskSnapshot) => {
       loading.dismiss();
       this.showAlert("Documento carregado com sucesso");
-    }).catch(err =>{
+    }).catch(err => {
       loading.dismiss();
       this.showAlert("Erro ao carregar o documento, tente novamente!");
-    });    
+    });
   }
 
   private showLoading(): Loading {
@@ -90,5 +99,5 @@ export class InfoVersaoPage {
       buttons: ['Ok']
     }).present();
   }
-  
+
 }
