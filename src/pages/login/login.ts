@@ -22,6 +22,7 @@ import * as firebase from 'firebase/app';
 })
 export class LoginPage {
 
+
   signinForm: FormGroup;
 
   constructor(public navCtrl: NavController,
@@ -39,24 +40,39 @@ export class LoginPage {
     this.signinForm = this.formBuilder.group({
       email: ['', Validators.compose([Validators.required, Validators.pattern(emailRegex)])],
       password: ['', [Validators.required]],
+      manterconectado: [false],
     });
   }
 
-  ionViewDidLoad() {  
-    let loading: Loading = this.showLoading();
-    this.menuCtrl.swipeEnable(false);
-    this.authService.isLogged()
-      .subscribe((authUser: firebase.User) => {
-        loading.dismiss();
-        if (authUser) {
-          this.navCtrl.setRoot(HomePage);
-        }
-      });
+  ionViewDidLoad() {
+    let user = localStorage.getItem("useremail");
+    let senha = localStorage.getItem("userpassword");
+    this.menuCtrl.swipeEnable(false);    
+    if (user !== null && senha !==null){
+      this.efetuarLogin(user, senha);
+    }
+    
   }
 
   onSubmit(): void {
+    if (this.signinForm.value.manterconectado) {
+      this.armazenarUsuario(this.signinForm.value.email, this.signinForm.value.password);
+    } else {
+      localStorage.removeItem("useremail");
+      localStorage.removeItem("userpassword");
+    }
+    
+    this.efetuarLogin(this.signinForm.value.email, this.signinForm.value.password);
+  }
+
+  armazenarUsuario(email: string, senha: string) {
+    localStorage.setItem("useremail", email);
+    localStorage.setItem("userpassword", senha);
+  }
+
+  efetuarLogin(email: string, senha: string) {
     let loading: Loading = this.showLoading();
-    this.authService.signIn(this.signinForm.value.email, this.signinForm.value.password)
+    this.authService.signIn(email, senha)
       .then((user: firebase.User) => {
         //usuário autenticado
         this.navCtrl.setRoot(HomePage);
@@ -92,8 +108,8 @@ export class LoginPage {
 
   loginUser() {
     this.authService.loginWithGoogle().then(data => {
-      let user: User = new User(data["user"]["displayName"], data["user"]["email"], data["user"]["email"],data["user"]["photoURL"]);      
-      this.userService.create(user, data["user"]["G"]).then(r => {        
+      let user: User = new User(data["user"]["displayName"], data["user"]["email"], data["user"]["email"], data["user"]["photoURL"]);
+      this.userService.create(user, data["user"]["G"]).then(r => {
         this.navCtrl.setRoot(HomePage);
       })
     })

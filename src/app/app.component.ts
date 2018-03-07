@@ -20,7 +20,7 @@ export class MyApp {
 
   rootPage: any = LoginPage;
   pages: Array<{ title: string, component: any }>;
-  
+
 
   constructor(
     public platform: Platform,
@@ -28,7 +28,7 @@ export class MyApp {
     public splashScreen: SplashScreen,
     public loadingCtrl: LoadingController,
     public alertCtrl: AlertController,
-    public authService: AuthProvider,    
+    public authService: AuthProvider,
     public userService: UserProvider
 
   ) {
@@ -64,6 +64,8 @@ export class MyApp {
       let loading: Loading = this.showLoading();
       this.authService.singOut()
         .then((user: firebase.User) => {
+          localStorage.removeItem("useremail");
+          localStorage.removeItem("userpassword");
           loading.dismiss();
           this.nav.setRoot(LoginPage);
         }).catch((error: any) => {

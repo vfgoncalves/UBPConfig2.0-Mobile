@@ -32,10 +32,17 @@
     </ion-item>
 
     <br>
+
+    <ion-item>
+      <ion-label>Manter Conectado</ion-label>
+      <ion-toggle formControlName="manterconectado"></ion-toggle>
+    </ion-item>
+
+    <br>
+
     <button ion-button color="dark" full type="submit" [disabled]="signinForm.invalid">Enter</button>
 
   </form>
-
   <button ion-button block color="danger" (click)="loginUser()">
     <ion-icon name="logo-googleplus"></ion-icon>
     Login with Google
