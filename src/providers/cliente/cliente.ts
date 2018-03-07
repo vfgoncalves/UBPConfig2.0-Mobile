@@ -45,4 +45,9 @@ export class ClienteProvider extends BaseProvider {
   createPushId():string{
     return this.db.createPushId()
   } 
+
+  delete(cli: Cliente): Promise<void> {
+    return this.db.object(`/clientes/${this.uuid}/${cli.id}`).remove()
+      .catch(this.handlePromiseError);
+  }
 }

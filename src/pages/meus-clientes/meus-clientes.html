@@ -7,25 +7,29 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-navbar>
-      <button ion-button menuToggle>
-        <ion-icon name="menu" color="dark"></ion-icon>
-      </button>
-      <ion-title>Meus Clientes</ion-title>
-    </ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu" color="dark"></ion-icon>
+    </button>
+    <ion-title>Meus Clientes</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-  <ion-card *ngFor='let cliente of clientes | async'>
-    <ion-card-header>
-      {{cliente.nome}}
-    </ion-card-header>
-    <ion-card-content>
-      {{cliente.descricao}}
-      {{cliente.email}}
-    </ion-card-content>
-  </ion-card>
+
+  <ion-list>
+    <ion-item-sliding *ngFor='let cliente of clientes | async'>
+      <ion-item>
+        <h4>{{cliente.nome}}</h4>
+        <h2>{{cliente.email}}</h2>
+      </ion-item>
+      <ion-item-options side="right">
+        <button ion-button color="danger" (click)="apagarCliente(cliente)">
+          <ion-icon name="trash"></ion-icon>
+          Deletar
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
 </ion-content>
