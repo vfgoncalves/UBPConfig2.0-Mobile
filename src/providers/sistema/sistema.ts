@@ -40,6 +40,12 @@ export class SistemaProvider extends BaseProvider {
       .catch(this.handlePromiseError);
   }
 
+  delete(id: string): Promise<void> {
+    return this.db.object(`/sistema/${this.uuid}/${id}`)            
+      .remove()
+      .catch(this.handlePromiseError);
+  }
+
   createPushId():string{
     return this.db.createPushId()
   }  

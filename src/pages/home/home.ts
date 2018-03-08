@@ -1,3 +1,4 @@
+import { VersaoProvider } from './../../providers/versao/versao';
 import { CadastroSistemaPage } from './../cadastro-sistema/cadastro-sistema';
 import { Sistema } from './../../models/sistema';
 import { Component } from '@angular/core';
@@ -16,6 +17,7 @@ export class HomePage {
   constructor(
     public navCtrl: NavController,
     public sisService: SistemaProvider,
+    public verService: VersaoProvider,
     public menuCtrl: MenuController,
     public loadingCtrl: LoadingController
   ) {
@@ -47,6 +49,17 @@ export class HomePage {
     loading.present();
 
     return loading;
+  }
+
+  apagarSistema(sistema:Sistema){
+    let loading: Loading = this.showLoading();
+    //apagar versões do sistema
+    this.verService.delete(sistema.id)
+    //apagar sistema
+    this.sisService.delete(sistema.id).then(()=>{
+      loading.dismiss()      
+    })
+
   }
 
 
