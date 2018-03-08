@@ -50,6 +50,11 @@ export class VersaoProvider extends BaseProvider {
       .catch(this.handlePromiseError);
   }
 
+  deleteVersao(idSis: string,idVer: string): Promise<void> {
+    return this.db.object(`/versao/${this.uuid}/${idSis}/${idVer}`).remove()
+      .catch(this.handlePromiseError);
+  }
+
   createPushId(): string {
     return this.db.createPushId()
   }

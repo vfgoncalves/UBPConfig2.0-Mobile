@@ -11,8 +11,8 @@
   <ion-list>
     <ion-item-sliding *ngFor='let sistema of sistemas | async' >
       <ion-item (click)="openVersion(sistema)">
-        <h4>{{sistema.nome}}</h4>
-        <h2>{{sistema.descricao}}</h2>
+        <h2>{{sistema.nome}}</h2>
+        <h4>{{sistema.descricao}}</h4>
       </ion-item>
       <ion-item-options side="right">
         <button ion-button color="danger" (click)="apagarSistema(sistema)">

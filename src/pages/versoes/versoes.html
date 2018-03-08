@@ -14,20 +14,25 @@
 
 
 <ion-content padding>
-  <ion-card *ngFor='let versao of versoes | async' (click)="openVersion(versao)">
-    <ion-card-header>
-      {{versao.name}}
-    </ion-card-header>
-    <ion-card-content>
-      Data prevista: {{versao.dataPrevista | date: 'dd/MM/yyyy'}}
-      <br/>
-      Status: {{getStatus(versao)}}
-    </ion-card-content>
-  </ion-card>
+  <ion-list>
+    <ion-item-sliding *ngFor='let versao of versoes | async'>
+      <ion-item (click)="openVersion(versao)">
+        <h2>{{versao.name}}</h2>
+        <h4>Data prevista: {{versao.dataPrevista | date: 'dd/MM/yyyy'}}</h4>
+        <h4>Status: {{getStatus(versao)}}</h4>
+      </ion-item>
+      <ion-item-options side="right">
+        <button ion-button color="danger" (click)="apagarVersao(versao)">
+          <ion-icon name="trash"></ion-icon>
+          Deletar
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
 
   <ion-fab bottom right (click)='addVersao()'>
     <button ion-fab color="dark">
       <ion-icon name="add"></ion-icon>
-    </button>    
+    </button>
   </ion-fab>
 </ion-content>

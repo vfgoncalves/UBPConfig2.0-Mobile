@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { CadastroVersaoPage } from './../cadastro-versao/cadastro-versao';
 import { Sistema } from './../../models/sistema';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, Loading } from 'ionic-angular';
 import { VersaoProvider } from '../../providers/versao/versao';
 import { InfoVersaoPage } from '../info-versao/info-versao';
 
@@ -26,7 +26,8 @@ export class VersoesPage {
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
-    public verService: VersaoProvider
+    public verService: VersaoProvider,
+    public loadingCtrl: LoadingController
   ) {
 
   }
@@ -49,6 +50,23 @@ export class VersoesPage {
   }
   openVersion(versao: Versao){
     this.navCtrl.push(InfoVersaoPage,{versao: versao})
+  }
+
+  apagarVersao(versao: Versao){
+    let loading: Loading = this.showLoading();
+    this.verService.deleteVersao(this.sistema.id, versao.id).then(()=>{
+      loading.dismiss();
+    })
+  }
+
+  private showLoading(): Loading {
+    let loading: Loading = this.loadingCtrl.create({
+      content: 'Buscando sistemas...'
+    });
+
+    loading.present();
+
+    return loading;
   }
 
 }
