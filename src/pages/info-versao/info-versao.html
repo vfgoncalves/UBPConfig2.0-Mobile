@@ -36,6 +36,9 @@
       Executáveis
     </ion-card-header>
     <ion-card-content>
+      <h4 *ngFor='let executavel of executaveis | async'>
+        <a href="{{executavel.url}}" target="_blank">{{executavel.name}}</a>
+      </h4>
     </ion-card-content>
 
     <label ion-button full color="dark" class="btn btn-default btn-file">
@@ -49,6 +52,9 @@
       Scripts
     </ion-card-header>
     <ion-card-content>
+      <h4 *ngFor='let script of scripts | async'>
+        <a href="script.url">{{script.name}}</a>
+      </h4>
     </ion-card-content>
 
     <label ion-button full color="dark" class="btn btn-default btn-file">
@@ -62,6 +68,9 @@
       Documentos
     </ion-card-header>
     <ion-card-content>
+      <h4 *ngFor='let documento of documentos | async'>
+        <a href="documento.url">{{documento.name}}</a>
+      </h4>
     </ion-card-content>
 
     <label ion-button full color="dark" class="btn btn-default btn-file">

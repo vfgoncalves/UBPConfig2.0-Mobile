@@ -69,12 +69,7 @@ export class VersaoProvider extends BaseProvider {
       .ref()
       .child(`/executavel/${this.uuid}/${idversao}/${executavel.name}`)
       .put(executavel);
-  }
-
-  getExecutaveis(idversao: string): Observable<any> {   
-    return this.db.list(`/executavel/${this.uuid}/${idversao}/`).valueChanges()
-  }
-
+  }  
   uploadScript(script, idversao: string): UploadTask {
     return this.firebaseApp
       .storage()

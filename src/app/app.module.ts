@@ -23,6 +23,7 @@ import { ClienteProvider } from '../providers/cliente/cliente';
 import { MeusClientesPage } from '../pages/meus-clientes/meus-clientes';
 import { VersaoProvider } from '../providers/versao/versao';
 import { VersoesPage } from '../pages/versoes/versoes';
+import { ArtefatoProvider } from '../providers/artefato/artefato';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyA0XbMc-o7DMfqSQ98sZaDkaNdxl6uHKwA",
@@ -74,7 +75,8 @@ export const firebaseConfig = {
     UserProvider,
     SistemaProvider,
     ClienteProvider,
-    VersaoProvider
+    VersaoProvider,
+    ArtefatoProvider
   ]
 })
 export class AppModule { }

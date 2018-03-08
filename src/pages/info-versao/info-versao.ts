@@ -1,8 +1,11 @@
+import { Artefato } from './../../models/artefato';
 import { UploadTaskSnapshot } from '@firebase/storage-types';
 import { VersaoProvider } from './../../providers/versao/versao';
 import { Versao } from './../../models/versao';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, AlertController, Loading } from 'ionic-angular';
+import { ArtefatoProvider } from '../../providers/artefato/artefato';
+import { Observable } from 'rxjs';
 
 /**
  * Generated class for the InfoVersaoPage page.
@@ -19,17 +22,19 @@ import { IonicPage, NavController, NavParams, LoadingController, AlertController
 export class InfoVersaoPage {
   versao: Versao;
   status: string;
-  executaveis: [{ exeuctavel: string, url: string }];
-  scripts: [{ script: string, url: string }];
-  documentos: [{ documento: string, url: string }];
   fileUploads: any[];
+
+  executaveis: Observable<Artefato[]>;
+  scripts: Observable<Artefato[]>;
+  documentos: Observable<Artefato[]>;
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     public loadingCtrl: LoadingController,
     public alertCtrl: AlertController,
-    public versaoService: VersaoProvider
+    public versaoService: VersaoProvider,
+    public artefatoService: ArtefatoProvider
   ) {
     this.versao = this.navParams.get("versao");
   }
@@ -38,9 +43,9 @@ export class InfoVersaoPage {
     this.getStatus();
 
     //lista de executáveis carregados
-    this.versaoService.getExecutaveis(this.versao.id).subscribe(r=>{
-      console.log(r);
-    })
+    this.executaveis = this.artefatoService.get(this.versao.id, "executavel").valueChanges();
+    this.scripts = this.artefatoService.get(this.versao.id, "script").valueChanges();
+    this.documentos = this.artefatoService.get(this.versao.id, "documento").valueChanges();   
   }
   getStatus() {
     if (this.versao.versaLiberada) {
@@ -53,8 +58,7 @@ export class InfoVersaoPage {
   uploadExec(executavel) {
     let loading: Loading = this.showLoading();
     this.versaoService.uploadExec(executavel.target.files[0], this.versao.id).then((r: UploadTaskSnapshot) => {
-      loading.dismiss();
-      this.showAlert("Executável carregado com sucesso");
+      this.cadastrarArtefato(r, "executavel", loading);
     }).catch(err => {
       loading.dismiss();
       this.showAlert("Erro ao carregar o executável, tente novamente!");
@@ -64,8 +68,7 @@ export class InfoVersaoPage {
   uploadScript(script) {
     let loading: Loading = this.showLoading();
     this.versaoService.uploadExec(script.target.files[0], this.versao.id).then((r: UploadTaskSnapshot) => {
-      loading.dismiss();
-      this.showAlert("Script carregado com sucesso");
+      this.cadastrarArtefato(r, "script", loading);
     }).catch(err => {
       loading.dismiss();
       this.showAlert("Erro ao carregar o script, tente novamente!");
@@ -75,12 +78,20 @@ export class InfoVersaoPage {
   uploadDocumento(documento) {
     let loading: Loading = this.showLoading();
     this.versaoService.uploadExec(documento.target.files[0], this.versao.id).then((r: UploadTaskSnapshot) => {
-      loading.dismiss();
-      this.showAlert("Documento carregado com sucesso");
+      this.cadastrarArtefato(r, "documento", loading);
     }).catch(err => {
       loading.dismiss();
       this.showAlert("Erro ao carregar o documento, tente novamente!");
     });
+  }
+
+  cadastrarArtefato(r: UploadTaskSnapshot, tipo: string, loading: Loading) {
+    let artefato: Artefato = new Artefato(null, this.versao.id, r.metadata.name, r.metadata.downloadURLs[0])
+
+    this.artefatoService.create(artefato, tipo).then(() => {
+      loading.dismiss();
+      this.showAlert("Artefato carregado com sucesso");
+    })
   }
 
   private showLoading(): Loading {
