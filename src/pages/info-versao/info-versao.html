@@ -41,7 +41,7 @@
       </h4>
     </ion-card-content>
 
-    <label ion-button full color="dark" class="btn btn-default btn-file">
+    <label ion-button block color="dark" class="btn btn-default btn-file">
       Selecionar Executável
       <input type="file" style="display: none;" (change)="uploadExec($event)">
     </label>
@@ -57,7 +57,7 @@
       </h4>
     </ion-card-content>
 
-    <label ion-button full color="dark" class="btn btn-default btn-file">
+    <label ion-button block color="dark" class="btn btn-default btn-file">
       Selecionar Script
       <input type="file" style="display: none;" (change)="uploadScript($event)">
     </label>
@@ -73,9 +73,14 @@
       </h4>
     </ion-card-content>
 
-    <label ion-button full color="dark" class="btn btn-default btn-file">
+    <label ion-button block color="dark" class="btn btn-default btn-file">
       Selecionar Documento
       <input type="file" style="display: none;" (change)="uploadDocumento($event)">
     </label>
   </ion-card>
+
+  <button ion-button block outline color="dark">
+    <ion-icon name="cloud-download"></ion-icon>
+    Download de Artefatos
+  </button>
 </ion-content>

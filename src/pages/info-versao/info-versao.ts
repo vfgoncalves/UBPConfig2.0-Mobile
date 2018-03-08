@@ -67,7 +67,7 @@ export class InfoVersaoPage {
 
   uploadScript(script) {
     let loading: Loading = this.showLoading();
-    this.versaoService.uploadExec(script.target.files[0], this.versao.id).then((r: UploadTaskSnapshot) => {
+    this.versaoService.uploadScript(script.target.files[0], this.versao.id).then((r: UploadTaskSnapshot) => {
       this.cadastrarArtefato(r, "script", loading);
     }).catch(err => {
       loading.dismiss();
@@ -77,7 +77,7 @@ export class InfoVersaoPage {
 
   uploadDocumento(documento) {
     let loading: Loading = this.showLoading();
-    this.versaoService.uploadExec(documento.target.files[0], this.versao.id).then((r: UploadTaskSnapshot) => {
+    this.versaoService.uploadDocumento(documento.target.files[0], this.versao.id).then((r: UploadTaskSnapshot) => {
       this.cadastrarArtefato(r, "documento", loading);
     }).catch(err => {
       loading.dismiss();
@@ -110,5 +110,6 @@ export class InfoVersaoPage {
       buttons: ['Ok']
     }).present();
   }
+
 
 }

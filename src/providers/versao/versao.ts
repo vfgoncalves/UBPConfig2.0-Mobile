@@ -67,14 +67,14 @@ export class VersaoProvider extends BaseProvider {
     return this.firebaseApp
       .storage()
       .ref()
-      .child(`/executavel/${this.uuid}/${idversao}/${executavel.name}`)
+      .child(`/${this.uuid}/${idversao}/executavel/${executavel.name}`)
       .put(executavel);
   }  
   uploadScript(script, idversao: string): UploadTask {
     return this.firebaseApp
       .storage()
       .ref()
-      .child(`/script/${this.uuid}/${idversao}/${script.name}`)
+      .child(`/${this.uuid}/${idversao}/script/${script.name}`)
       .put(script);
   }
 
@@ -82,7 +82,14 @@ export class VersaoProvider extends BaseProvider {
     return this.firebaseApp
       .storage()
       .ref()
-      .child(`/documento/${this.uuid}/${idversao}/${documento.name}`)
+      .child(`/${this.uuid}/${idversao}/documento/${documento.name}`)
       .put(documento);
+  }
+
+  downloadArtefatos(idversao: string):Promise<any>{
+    return this.firebaseApp
+      .storage()
+      .ref()
+      .child(`/${this.uuid}/${idversao}/`).getDownloadURL();
   }
 }
