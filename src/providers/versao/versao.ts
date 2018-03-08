@@ -85,11 +85,4 @@ export class VersaoProvider extends BaseProvider {
       .child(`/${this.uuid}/${idversao}/documento/${documento.name}`)
       .put(documento);
   }
-
-  downloadArtefatos(idversao: string):Promise<any>{
-    return this.firebaseApp
-      .storage()
-      .ref()
-      .child(`/${this.uuid}/${idversao}/`).getDownloadURL();
-  }
 }

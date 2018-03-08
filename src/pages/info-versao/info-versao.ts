@@ -45,7 +45,7 @@ export class InfoVersaoPage {
     //lista de executáveis carregados
     this.executaveis = this.artefatoService.get(this.versao.id, "executavel").valueChanges();
     this.scripts = this.artefatoService.get(this.versao.id, "script").valueChanges();
-    this.documentos = this.artefatoService.get(this.versao.id, "documento").valueChanges();   
+    this.documentos = this.artefatoService.get(this.versao.id, "documento").valueChanges();
   }
   getStatus() {
     if (this.versao.versaLiberada) {
@@ -56,33 +56,39 @@ export class InfoVersaoPage {
   }
 
   uploadExec(executavel) {
-    let loading: Loading = this.showLoading();
-    this.versaoService.uploadExec(executavel.target.files[0], this.versao.id).then((r: UploadTaskSnapshot) => {
-      this.cadastrarArtefato(r, "executavel", loading);
-    }).catch(err => {
-      loading.dismiss();
-      this.showAlert("Erro ao carregar o executável, tente novamente!");
-    });
+    if (this.verificarStatus()) {
+      let loading: Loading = this.showLoading();
+      this.versaoService.uploadExec(executavel.target.files[0], this.versao.id).then((r: UploadTaskSnapshot) => {
+        this.cadastrarArtefato(r, "executavel", loading);
+      }).catch(err => {
+        loading.dismiss();
+        this.showAlert("Erro ao carregar o executável, tente novamente!");
+      });
+    }
   }
 
   uploadScript(script) {
-    let loading: Loading = this.showLoading();
-    this.versaoService.uploadScript(script.target.files[0], this.versao.id).then((r: UploadTaskSnapshot) => {
-      this.cadastrarArtefato(r, "script", loading);
-    }).catch(err => {
-      loading.dismiss();
-      this.showAlert("Erro ao carregar o script, tente novamente!");
-    });
+    if (this.verificarStatus()) {
+      let loading: Loading = this.showLoading();
+      this.versaoService.uploadScript(script.target.files[0], this.versao.id).then((r: UploadTaskSnapshot) => {
+        this.cadastrarArtefato(r, "script", loading);
+      }).catch(err => {
+        loading.dismiss();
+        this.showAlert("Erro ao carregar o script, tente novamente!");
+      });
+    }
   }
 
   uploadDocumento(documento) {
-    let loading: Loading = this.showLoading();
-    this.versaoService.uploadDocumento(documento.target.files[0], this.versao.id).then((r: UploadTaskSnapshot) => {
-      this.cadastrarArtefato(r, "documento", loading);
-    }).catch(err => {
-      loading.dismiss();
-      this.showAlert("Erro ao carregar o documento, tente novamente!");
-    });
+    if (this.verificarStatus()) {
+      let loading: Loading = this.showLoading();
+      this.versaoService.uploadDocumento(documento.target.files[0], this.versao.id).then((r: UploadTaskSnapshot) => {
+        this.cadastrarArtefato(r, "documento", loading);
+      }).catch(err => {
+        loading.dismiss();
+        this.showAlert("Erro ao carregar o documento, tente novamente!");
+      });
+    }
   }
 
   cadastrarArtefato(r: UploadTaskSnapshot, tipo: string, loading: Loading) {
@@ -109,6 +115,22 @@ export class InfoVersaoPage {
       message: message,
       buttons: ['Ok']
     }).present();
+  }
+
+  liberarVersao() {
+    this.versao.versaLiberada = true;
+    this.getStatus();
+  }
+
+  verificarStatus(): boolean {
+    let retorno: boolean = true;
+
+    if (this.versao.versaLiberada == true){
+      retorno = false;
+      this.showAlert("Não é possível carregar artefatos, pois a versão já foi liberada para o(s) cliente(s)!")
+    }
+
+    return retorno;
   }
 
 
